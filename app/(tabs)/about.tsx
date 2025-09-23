@@ -9,6 +9,7 @@ export default function AboutScreen() {
 
         <ThemedView style={styles.container}>
             <SafeAreaView>
+                <ThemedButton iconName="check" textStyle={{ fontSize: 20, color: 'green' }}>Test 1</ThemedButton>
                 <ThemedButton iconName="check" style={{ width: 200 }}>Test 1</ThemedButton>
                 <ThemedButton lightContainerColor="red" lightTextColor="blue">Test 2</ThemedButton>
             </SafeAreaView>

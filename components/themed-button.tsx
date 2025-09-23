@@ -1,20 +1,23 @@
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { MaterialIcons } from "@expo/vector-icons";
 import { PropsWithChildren } from "react";
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { TextStyle, ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
 
 type ThemedButtonProps = {
     lightContainerColor?: string,
     darkContainerColor?: string,
     lightTextColor?: string,
     darkTextColor?: string,
-    style?: StyleProp<ViewStyle>,
+    style?: ViewStyle,
+    textStyle?: TextStyle,
     iconName?: any,
 }
 
 export default function ThemedButton({
     children,
     style,
+    textStyle,
     iconName,
     lightContainerColor,
     darkContainerColor,
@@ -26,8 +29,12 @@ export default function ThemedButton({
 
     return (
         <View style={[styles.container, { backgroundColor: containerColor }, style]}>
-            {iconName ? <MaterialIcons name={iconName} color={textColor} size={14}></MaterialIcons> : null}
-            <Text style={[styles.text, { color: textColor }]}>{children}</Text>
+            {iconName ? <MaterialIcons
+                name={iconName}
+                color={textStyle?.color ?? textColor}
+                size={textStyle?.fontSize ?? 14}>
+            </MaterialIcons> : null}
+            <Text style={[styles.text, { color: textColor }, textStyle]}>{children}</Text>
         </View>
     )
 }
