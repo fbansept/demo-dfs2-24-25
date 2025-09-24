@@ -1,10 +1,11 @@
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { MaterialIcons } from "@expo/vector-icons";
 import { PropsWithChildren } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { GestureResponderEvent, Pressable, StyleSheet, Text } from "react-native";
 import { TextStyle, ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
 
 type ThemedButtonProps = {
+    onPress: (event: GestureResponderEvent) => void,
     lightContainerColor?: string,
     darkContainerColor?: string,
     lightTextColor?: string,
@@ -15,6 +16,7 @@ type ThemedButtonProps = {
 }
 
 export default function ThemedButton({
+    onPress,
     children,
     style,
     textStyle,
@@ -28,14 +30,14 @@ export default function ThemedButton({
     const textColor = useThemeColor({ light: lightTextColor, dark: darkTextColor }, 'buttonText');
 
     return (
-        <View style={[styles.container, { backgroundColor: containerColor }, style]}>
+        <Pressable onPress={onPress} style={[styles.container, { backgroundColor: containerColor }, style]}>
             {iconName ? <MaterialIcons
                 name={iconName}
                 color={textStyle?.color ?? textColor}
                 size={textStyle?.fontSize ?? 14}>
             </MaterialIcons> : null}
             <Text style={[styles.text, { color: textColor }, textStyle]}>{children}</Text>
-        </View>
+        </Pressable>
     )
 }
 

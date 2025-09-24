@@ -39,6 +39,18 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <MaterialIcons name="question-mark" size={28} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="task/[id]"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="task/create"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
